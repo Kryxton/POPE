@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>POPE</title>
+  <style>
+    /* Shiny Gold Animations */
+    @keyframes shine {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes shine-bg {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 100% 100%; }
+    }
+    
+    /* Shiny Gold Text Effect (for text on white backgrounds) */
+    .gold-gradient {
+      background: linear-gradient(45deg, #FFD700, #B8860B, #DAA520, #FFD700);
+      background-size: 400% 400%;
+      animation: shine 3s infinite linear;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    /* Shiny Gold Background Effect (for elements that were black) */
+    .shiny-gold-bg {
+      background: linear-gradient(45deg, #FFD700, #B8860B, #DAA520, #FFD700);
+      background-size: 200% 200%;
+      animation: shine-bg 3s infinite linear;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+      color: white;
+    }
+    
+    /* Extra glow for text */
+    .glow {
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
+                   0 0 20px rgba(218, 165, 32, 0.8);
+    }
+    
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      color: #B8860B; /* gold text on white background */
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    .container {
+      max-width: 500px;
+      width: 100%;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1, p {
+      margin: 10px 0;
+      word-wrap: break-word;
+    }
+    
+    /* Image Container */
+    .image-container {
+      width: 100%;
+      max-width: 400px;
+      height: 400px;
+      margin: 20px 0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Social Buttons */
+    .socials {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 400px;
+    }
+    .socials a {
+      display: block;
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-align: center;
+      transition: 0.2s;
+    }
+    .socials a:hover {
+      background: linear-gradient(45deg, #DAA520, #FFD700);
+    }
+    
+    /* Contract Address Section */
+    .ca-container {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 400px;
+    }
+    .ca-box {
+      padding: 12px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-align: center;
+      max-width: 100%;
+      font-size: 14px;
+      line-height: 1.4;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    .copy-btn {
+      border: none;
+      padding: 10px;
+      margin-top: 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+      width: 120px;
+    }
+    .copy-btn:hover {
+      background: linear-gradient(45deg, #DAA520, #FFD700);
+    }
+    
+    /* Meme Section */
+    .meme-section {
+      margin: 20px 0;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    /* Meme grid: always two items per row */
+    .meme-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .meme-grid img,
+    .meme-grid video {
+      width: calc(50% - 10px);
+      border-radius: 10px;
+    }
+    /* Ensure video elements in the grid show their first frame */
+    .meme-grid video {
+      cursor: pointer;
+      background: black;
+    }
+    
+    /* How to Buy Section */
+    .how-to-buy {
+      margin-top: 30px;
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .how-to-buy .step {
+      padding: 15px;
+      border-radius: 5px;
+      text-align: left;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      font-weight: bold;
+    }
+    .how-to-buy .step span {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+    
+    /* Chart Container */
+    .chart-container {
+      width: 100%;
+      max-width: 500px;
+      height: 350px;
+      margin-top: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .chart-container iframe {
+      width: 100%;
+      height: 600px;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      .container {
+        width: 100%;
+        padding: 10px;
+      }
+      .image-container {
+        height: 300px;
+      }
+      .ca-box {
+        font-size: 12px;
+        padding: 10px;
+      }
+      .copy-btn {
+        width: 100px;
+        padding: 8px;
+        font-size: 12px;
+      }
+      .chart-container {
+        height: 250px;
+      }
+      .how-to-buy .step {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+    
+    /* Apply the shiny gold background to these elements */
+    .image-container,
+    .socials a,
+    .ca-box,
+    .copy-btn,
+    .chart-container,
+    .meme-section,
+    .how-to-buy .step {
+      background: linear-gradient(45deg, #FFD700, #B8860B, #DAA520, #FFD700);
+      background-size: 200% 200%;
+      animation: shine-bg 3s infinite linear;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+      color: white;
+    }
+    
+    /* Apply shiny gold text effect to headings and labels on white background */
+    h1,
+    p,
+    .ca-container p {
+      background: linear-gradient(45deg, #FFD700, #B8860B, #DAA520, #FFD700);
+      background-size: 400% 400%;
+      animation: shine 3s infinite linear;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="gold-gradient glow">POPE</h1>
+    <p class="gold-gradient">I will praise the trenches</p>
+    
+    <div class="image-container shiny-gold-bg">
+      <img src="pope.jpeg" alt="$Pawpe" />
+    </div>
+    
+    <div class="socials">
+      <a href="https://t.me/OgPopeSol" target="_blank" class="shiny-gold-bg">Telegram</a>
+      <a href="https://x.com/popesolcto?s=21" target="_blank" class="shiny-gold-bg">Twitter</a>
+      <a href="https://pump.fun/coin/Eyo6MC3mCjkZDgB8pafGyKyAhEi4xuykbqw7WhcDG4ks" target="_blank" class="shiny-gold-bg">Pump.fun</a>
+      <a href="https://dexscreener.com/solana/84miyNhKBJ7xNVeFUxdhFMcLLg7JoW3dxZc6ELfeNSFk" class="shiny-gold-bg">Dexscreener</a>
+    </div>
+    
+    <!-- Contract Address Section -->
+    <div class="ca-container">
+      <p class="gold-gradient glow">Contract Address:</p>
+      <div class="ca-box shiny-gold-bg" id="ca">
+        Eyo6MC3mCjkZDgB8pafGyKyAhEi4xuykbqw7WhcDG4ks
+      </div>
+      <button class="copy-btn shiny-gold-bg" onclick="copyCA()">Copy</button>
+    </div>
+    
+    <!-- Meme Section -->
+    <div class="meme-section shiny-gold-bg">
+      <div class="meme-grid">
+        <img src="meme1.jpeg" alt="Meme" />
+        <img src="meme2.jpeg" alt="Meme" />
+        <img src="meme3.jpeg" alt="Meme" />
+        <img src="meme4.jpeg" alt="Meme" />
+        <!-- Directly embed MOV videos -->
+        <video class="meme-video" preload="auto" playsinline style="cursor: pointer;">
+          <source src="meme5.MOV" type="video/quicktime">
+        </video>
+        <video class="meme-video" preload="auto" playsinline style="cursor: pointer;">
+          <source src="meme6.MOV" type="video/quicktime">
+        </video>
+      </div>
+    </div>
+    
+    <!-- How to Buy Section -->
+    <div class="how-to-buy">
+      <div class="step">
+        <span>Step 1:</span>
+        Get a Solana wallet like Phantom or Solflare.
+      </div>
+      <div class="step">
+        <span>Step 2:</span>
+        Purchase Solana (SOL) from a crypto exchange.
+      </div>
+      <div class="step">
+        <span>Step 3:</span>
+        Transfer SOL to your wallet.
+      </div>
+      <div class="step">
+        <span>Step 4:</span>
+        Go to a decentralized exchange (DEX) on Solana.
+      </div>
+      <div class="step">
+        <span>Step 5:</span>
+        Swap SOL for $POPE using the contract address.
+      </div>
+    </div>
+    
+    <div class="chart-container shiny-gold-bg">
+    <iframe 
+	width="100%" 
+	height="600" 
+	src="https://birdeye.so/tv-widget/Eyo6MC3mCjkZDgB8pafGyKyAhEi4xuykbqw7WhcDG4ks?chain=solana&viewMode=pair&chartInterval=15&chartType=Candle&chartTimezone=Europe%2FBerlin&chartLeftToolbar=show&theme=light&chartOverrides=mainSeriesProperties.candleStyle.upColor%3A%23dfa208&chartOverrides=mainSeriesProperties.candleStyle.borderUpColor%3A%23dfa208&chartOverrides=mainSeriesProperties.candleStyle.wickUpColor%3A%23dfa208" 
+	frameborder="0" 
+	allowfullscreen>
+</iframe>
+    </div>
+  </div>
+  
+  <script>
+    function copyCA() {
+      const caText = document.getElementById("ca").textContent;
+      navigator.clipboard.writeText(caText).then(() => {
+        alert("Contract Address copied!");
+      });
+    }
+
+    // For each video in the meme grid, ensure it displays its first frame when loaded,
+    // and add a click event to play and show controls.
+    document.addEventListener('DOMContentLoaded', function() {
+      const memeVideos = document.querySelectorAll('.meme-video');
+      memeVideos.forEach(function(video) {
+        // When metadata is loaded, force the currentTime to 0 so the first frame is visible.
+        video.addEventListener('loadeddata', function() {
+          video.currentTime = 0;
+          video.pause();
+        });
+        // On click, add controls and play the video.
+        video.addEventListener('click', function() {
+          video.setAttribute('controls', '');
+          video.play();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
